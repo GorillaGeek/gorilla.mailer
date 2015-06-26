@@ -59,11 +59,15 @@
     <Compile Include="enEmailProvider.cs" />
     <Compile Include="Interfaces\IMailer.cs" />
     <Compile Include="Interfaces\IMessage.cs" />
+    <Compile Include="Interfaces\ITemplateSource.cs" />
     <Compile Include="Mailer.cs" />
     <Compile Include="MailerException.cs" />
     <Compile Include="MandrillMailer.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates\FileSystemTemplate.cs" />
+    <Compile Include="Templates\MailerTemplate.cs" />
+    <Compile Include="Templates\StringTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,13 +1,10 @@
-﻿
-namespace Gorilla.Mailer.Interfaces
+﻿namespace Gorilla.Mailer.Interfaces
 {
     public interface IMessage
     {
-
-        string Subject { get; set; }
-        string From { get; set; }
-        string To { get; set; }
-        string Body { get; set; }
-
+        string Subject { get; }
+        string From { get; }
+        string To { get; }
+        string Body { get; }
     }
 }
