@@ -15,7 +15,7 @@ namespace Gorilla.Mailer
 
         public MandrillMailer(string key)
         {
-            this._api = new MandrillApi(key);
+            _api = new MandrillApi(key);
         }
 
         public async Task<string> Send(IMessage message)

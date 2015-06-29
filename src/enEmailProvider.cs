@@ -11,6 +11,8 @@ namespace Gorilla.Mailer
         /// <summary>
         /// Mandrill strategy
         /// </summary>
-        Mandrill = 1
+        Mandrill = 1,
+
+        Development = 2
     }
 }
