@@ -20,7 +20,6 @@ namespace Gorilla.Mailer
 
         public async Task<string> Send(IMessage message)
         {
-
             //var info = _api.UserInfo();
 
             var msg = new EmailMessage();
