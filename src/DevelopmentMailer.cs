@@ -25,7 +25,7 @@ namespace Gorilla.Mailer
                     Directory.CreateDirectory(outputPath);
                 }
 
-                var fileName = Path.Combine(outputPath, Guid.NewGuid() + ".htm");
+                var fileName = Path.Combine(outputPath, DateTime.Now.ToString("yyyyMMddhhmmss-") + (new Random().Next(1, int.MaxValue)) + ".htm");
                 File.WriteAllText(fileName, message.Body);
 
                 System.Diagnostics.Process.Start(fileName);
