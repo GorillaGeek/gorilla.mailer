@@ -13,7 +13,12 @@ namespace Gorilla.Mailer.Providers
             var key = ConfigurationManager.AppSettings["Gorilla.Mailer.Key"];
             //var secret = ConfigurationManager.AppSettings["Gorilla.Mailer.Secret"];
 
-            var provider = (enEmailProvider)Enum.Parse(typeof(enEmailProvider), providerName);
+            var provider = enEmailProvider.Development;
+
+            if (providerName != null)
+            {
+                provider = (enEmailProvider)Enum.Parse(typeof(enEmailProvider), providerName);
+            }
 
             switch (provider)
             {
