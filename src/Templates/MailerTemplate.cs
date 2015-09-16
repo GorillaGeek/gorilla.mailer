@@ -10,7 +10,7 @@ namespace Gorilla.Mailer.Templates
     {
         private ITemplateSource _template;
 
-        public Dictionary<string, object> Params { get; set; }
+        public virtual Dictionary<string, object> Params { get; set; }
 
         public MailerTemplate()
         {
