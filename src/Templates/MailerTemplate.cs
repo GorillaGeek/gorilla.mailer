@@ -25,10 +25,7 @@ namespace Gorilla.Mailer.Templates
 
         public string Render()
         {
-            if (_template == null)
-            {
-                throw new NullReferenceException("Template not defined");
-            }
+            if (_template == null) throw new NullReferenceException("Template not defined");
 
             var result = Params.Aggregate(_template.GetContent(), (current, item) =>
                 current.Replace(string.Format("[{0}]", item.Key), (item.Value ?? "").ToString())
