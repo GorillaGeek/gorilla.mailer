@@ -13,6 +13,8 @@ namespace Gorilla.Mailer
         /// </summary>
         Mandrill = 1,
 
-        Development = 2
+        Development = 2,
+
+        SendGrid = 3
     }
 }
