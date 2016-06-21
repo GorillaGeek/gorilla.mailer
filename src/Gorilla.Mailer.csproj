@@ -67,20 +67,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DevelopmentMailer.cs" />
+    <Compile Include="Providers\DevelopmentMailer.cs" />
     <Compile Include="enEmailProvider.cs" />
     <Compile Include="Interfaces\IMailer.cs" />
     <Compile Include="Interfaces\IMessage.cs" />
     <Compile Include="Interfaces\ITemplateSource.cs" />
-    <Compile Include="MailerException.cs" />
-    <Compile Include="SendGridMailer.cs" />
+    <Compile Include="Exceptions\MailerException.cs" />
+    <Compile Include="Providers\SendGridMailer.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\MailerProvider.cs" />
-    <Compile Include="Templates\FileSystemTemplate.cs" />
+    <Compile Include="MailerProvider.cs" />
+    <Compile Include="Templates\Providers\FileSystemTemplate.cs" />
     <Compile Include="Templates\MailerTemplate.cs" />
-    <Compile Include="Templates\ManifestResourceStreamTemplate.cs" />
-    <Compile Include="Templates\StringTemplate.cs" />
+    <Compile Include="Templates\Providers\ManifestResourceStreamTemplate.cs" />
+    <Compile Include="Templates\Providers\StringTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

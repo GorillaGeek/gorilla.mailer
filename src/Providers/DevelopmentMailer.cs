@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Gorilla.Mailer
+namespace Gorilla.Mailer.Providers
 {
     public class DevelopmentMailer : IMailer
     {
@@ -18,18 +18,13 @@ namespace Gorilla.Mailer
 
         public async Task<string> Send(IMessage message)
         {
-            return await Send(message.Subject, message.From, message.To, message.Body);
-        }
-
-        public async Task<string> Send(string subject, string from, string to, string body)
-        {
             if (!Directory.Exists(_outputPath))
             {
                 Directory.CreateDirectory(_outputPath);
             }
 
             var fileName = Path.Combine(_outputPath, DateTime.Now.ToString("yyyyMMddhhmmss-") + (new Random().Next(1, int.MaxValue)) + ".htm");
-            File.WriteAllText(fileName, body);
+            File.WriteAllText(fileName, message.Body);
 
             if (_autoStart)
             {

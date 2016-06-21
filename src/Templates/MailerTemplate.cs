@@ -1,4 +1,5 @@
 ﻿using Gorilla.Mailer.Interfaces;
+using Gorilla.Mailer.Templates.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +9,16 @@ namespace Gorilla.Mailer.Templates
 {
     public class MailerTemplate
     {
-        private ITemplateSource _template;
-
+        private readonly ITemplateSource _template;
         public virtual Dictionary<string, object> Params { get; set; }
 
-        public MailerTemplate()
+        public MailerTemplate(ITemplateSource template)
         {
+            _template = template;
             Params = new Dictionary<string, object>();
         }
 
-        public MailerTemplate SetTemplate(ITemplateSource template)
-        {
-            _template = template;
-            return this;
-        }
-
+        //Methods
         public string Render()
         {
             if (_template == null) throw new NullReferenceException("Template not defined");
@@ -42,20 +38,21 @@ namespace Gorilla.Mailer.Templates
             return Regex.Replace(content, @"<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:""[^""]*""|'[^']*'|[\w\-.:]+))?)*\s*/?>\s*</\1\s*>", string.Empty, RegexOptions.Multiline);
         }
 
+        //Statics
         public static MailerTemplate CreateFromString(string templateString)
         {
-            return (new MailerTemplate()).SetTemplate(new StringTemplate(templateString));
+            return new MailerTemplate(new StringTemplate(templateString));
         }
 
         public static MailerTemplate CreateFromFileSystem(string path)
         {
-            return (new MailerTemplate()).SetTemplate(new FileSystemTemplate(path));
+            return new MailerTemplate(new FileSystemTemplate(path));
         }
 
         public static MailerTemplate CreateFromManifestResourceStream(string streamPath)
         {
-            var template = new ManifestResourceStreamTemplate(streamPath);
-            return (new MailerTemplate()).SetTemplate(template);
+            var templateSource = new ManifestResourceStreamTemplate(streamPath);
+            return new MailerTemplate(templateSource);
         }
     }
 }

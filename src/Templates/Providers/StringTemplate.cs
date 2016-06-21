@@ -1,6 +1,6 @@
 ﻿using Gorilla.Mailer.Interfaces;
 
-namespace Gorilla.Mailer.Templates
+namespace Gorilla.Mailer.Templates.Providers
 {
     public class StringTemplate : ITemplateSource
     {

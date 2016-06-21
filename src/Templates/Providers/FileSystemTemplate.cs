@@ -1,7 +1,7 @@
 ﻿using Gorilla.Mailer.Interfaces;
 using System.IO;
 
-namespace Gorilla.Mailer.Templates
+namespace Gorilla.Mailer.Templates.Providers
 {
     public class FileSystemTemplate : ITemplateSource
     {
@@ -19,7 +19,7 @@ namespace Gorilla.Mailer.Templates
 
         public string GetContent()
         {
-            return this._content;
+            return _content;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Gorilla.Mailer.Templates
+namespace Gorilla.Mailer.Templates.Providers
 {
     public class ManifestResourceStreamTemplate : ITemplateSource
     {

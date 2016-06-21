@@ -1,9 +1,10 @@
-﻿using Gorilla.Mailer.Interfaces;
+﻿using Gorilla.Mailer.Exceptions;
+using Gorilla.Mailer.Interfaces;
 using System;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace Gorilla.Mailer
+namespace Gorilla.Mailer.Providers
 {
     public class SendGridMailer : IMailer
     {
@@ -16,31 +17,25 @@ namespace Gorilla.Mailer
 
         public async Task<string> Send(IMessage message)
         {
-            return await Send(message.Subject, message.From, message.To, message.Body);
-        }
-
-        public async Task<string> Send(string subject, string from, string to, string body)
-        {
             var msg = new SendGrid.SendGridMessage();
 
-            msg.Subject = subject;
-            msg.From = new MailAddress(from);
-            msg.Html = body;
+            msg.Subject = message.Subject;
+            msg.From = new MailAddress(message.From);
+            msg.Html = message.Body;
 
-            msg.AddTo(to);
+            msg.AddTo(message.To);
 
             msg.EnableClickTracking();
             msg.EnableOpenTracking();
 
-            var transportWeb = new SendGrid.Web(_apiKey);
-
             try
             {
+                var transportWeb = new SendGrid.Web(_apiKey);
                 await transportWeb.DeliverAsync(msg);
             }
             catch (Exception ex)
             {
-                throw new MailerException(ex.Message, 1);
+                throw new MailerException(ex.Message, MailerException.enReason.RejectByProvider);
             }
 
             return null;

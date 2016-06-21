@@ -12,10 +12,10 @@ namespace Gorilla.Mailer
 
         private Message(string subject, string from, string to, string body)
         {
-            this.Subject = subject;
-            this.From = from;
-            this.To = to;
-            this.Body = body;
+            Subject = subject;
+            From = from;
+            To = to;
+            Body = body;
         }
 
         public static IMessage Create(string subject, string from, string to, string body)

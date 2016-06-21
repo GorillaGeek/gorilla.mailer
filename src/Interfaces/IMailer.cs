@@ -6,8 +6,5 @@ namespace Gorilla.Mailer.Interfaces
     {
 
         Task<string> Send(IMessage message);
-
-        Task<string> Send(string subject, string from, string to, string body);
-
     }
 }
