@@ -11,11 +11,8 @@ How to use
 ----------
 
 ```cs
-// Production
-// var mailer = Mailer.Create(enEmailProvider.SendGrid, "your-api-key");
-
 // Development
-var mailer = Mailer.CreateForDevelopement("path-to-folder-output");
+var mailer = Provider.DevelopmentMailer("path-to-folder-output");
 var providerResultKey = await mailer.Send("Subject", "From", "To", "Body");
 ```
 

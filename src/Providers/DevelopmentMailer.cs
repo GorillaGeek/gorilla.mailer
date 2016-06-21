@@ -10,7 +10,7 @@ namespace Gorilla.Mailer.Providers
         private readonly string _outputPath;
         private readonly bool _autoStart;
 
-        public DevelopmentMailer(string outputPath, bool autoStart)
+        public DevelopmentMailer(string outputPath, bool autoStart = true)
         {
             _outputPath = outputPath;
             _autoStart = autoStart;
