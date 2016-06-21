@@ -1,33 +1,38 @@
 ﻿using Gorilla.Mailer.Interfaces;
 using System;
-using System.Configuration;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace Gorilla.Mailer
 {
-    /// <summary>
-    /// Mailer for developmento purpose
-    /// </summary>
     public class DevelopmentMailer : IMailer
     {
+        private readonly string _outputPath;
+        private readonly bool _autoStart;
+
+        public DevelopmentMailer(string outputPath, bool autoStart)
+        {
+            _outputPath = outputPath;
+            _autoStart = autoStart;
+        }
+
         public async Task<string> Send(IMessage message)
         {
-            System.Diagnostics.Debug.WriteLine("Email Message : ");
-            System.Diagnostics.Debug.WriteLine(message.ToString());
+            return await Send(message.Subject, message.From, message.To, message.Body);
+        }
 
-            var outputPath = ConfigurationManager.AppSettings["Gorilla.Mailer.DevelopmentOutputPath"];
-
-            if (!string.IsNullOrWhiteSpace(outputPath))
+        public async Task<string> Send(string subject, string from, string to, string body)
+        {
+            if (!Directory.Exists(_outputPath))
             {
-                if (!Directory.Exists(outputPath))
-                {
-                    Directory.CreateDirectory(outputPath);
-                }
+                Directory.CreateDirectory(_outputPath);
+            }
 
-                var fileName = Path.Combine(outputPath, DateTime.Now.ToString("yyyyMMddhhmmss-") + (new Random().Next(1, int.MaxValue)) + ".htm");
-                File.WriteAllText(fileName, message.Body);
+            var fileName = Path.Combine(_outputPath, DateTime.Now.ToString("yyyyMMddhhmmss-") + (new Random().Next(1, int.MaxValue)) + ".htm");
+            File.WriteAllText(fileName, body);
 
+            if (_autoStart)
+            {
                 System.Diagnostics.Process.Start(fileName);
             }
 

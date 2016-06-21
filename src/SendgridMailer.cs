@@ -1,11 +1,5 @@
 ﻿using Gorilla.Mailer.Interfaces;
-using Mandrill;
-using Mandrill.Models;
-using Mandrill.Requests.Messages;
-using SendGrid;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
@@ -22,13 +16,18 @@ namespace Gorilla.Mailer
 
         public async Task<string> Send(IMessage message)
         {
-            var msg = new SendGridMessage();
+            return await Send(message.Subject, message.From, message.To, message.Body);
+        }
 
-            msg.Subject = message.Subject;
-            msg.From = new MailAddress(message.From);
-            msg.Html = message.Body;
+        public async Task<string> Send(string subject, string from, string to, string body)
+        {
+            var msg = new SendGrid.SendGridMessage();
 
-            msg.AddTo(message.To);
+            msg.Subject = subject;
+            msg.From = new MailAddress(from);
+            msg.Html = body;
+
+            msg.AddTo(to);
 
             msg.EnableClickTracking();
             msg.EnableOpenTracking();
@@ -41,7 +40,7 @@ namespace Gorilla.Mailer
             }
             catch (Exception ex)
             {
-                throw new MailerException(ex.Message, (byte)EmailResultStatus.Rejected);
+                throw new MailerException(ex.Message, 1);
             }
 
             return null;

@@ -1,24 +1,26 @@
 ﻿using Gorilla.Mailer.Interfaces;
-using Ninject.Activation;
 using System;
 
 namespace Gorilla.Mailer.Providers
 {
     public class MailerProvider
     {
-        protected IMailer CreateInstance(IContext context, enEmailProvider provider, string key)
+        protected IMailer Create(enEmailProvider provider, string apiKey = null)
         {
             switch (provider)
             {
-                case enEmailProvider.Mandrill:
-                    return new MandrillMailer(key);
                 case enEmailProvider.SendGrid:
-                    return new SendGridMailer(key);
+                    return new SendGridMailer(apiKey);
                 case enEmailProvider.Development:
-                    return new DevelopmentMailer();
+                    throw new MailerException("Use CreateForDevelopement method for development", 0);
                 default:
                     throw new NotSupportedException("Invalid Email Provider : " + provider);
             }
+        }
+
+        protected IMailer CreateForDevelopement(string outputPath, bool autoStart = true)
+        {
+            return new DevelopmentMailer(outputPath, autoStart);
         }
     }
 }
