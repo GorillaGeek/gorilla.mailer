@@ -1,25 +1,13 @@
 ﻿using Gorilla.Mailer.Interfaces;
 using Ninject.Activation;
 using System;
-using System.Configuration;
 
 namespace Gorilla.Mailer.Providers
 {
-    public class MailerProvider : Provider<IMailer>
+    public class MailerProvider
     {
-        protected override IMailer CreateInstance(IContext context)
+        protected IMailer CreateInstance(IContext context, enEmailProvider provider, string key)
         {
-            var providerName = ConfigurationManager.AppSettings["Gorilla.Mailer.Provider"];
-            var key = ConfigurationManager.AppSettings["Gorilla.Mailer.Key"];
-            //var secret = ConfigurationManager.AppSettings["Gorilla.Mailer.Secret"];
-
-            var provider = enEmailProvider.Development;
-
-            if (providerName != null)
-            {
-                provider = (enEmailProvider)Enum.Parse(typeof(enEmailProvider), providerName);
-            }
-
             switch (provider)
             {
                 case enEmailProvider.Mandrill:

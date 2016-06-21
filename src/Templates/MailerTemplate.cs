@@ -28,21 +28,18 @@ namespace Gorilla.Mailer.Templates
             if (_template == null) throw new NullReferenceException("Template not defined");
 
             var result = Params.Aggregate(_template.GetContent(), (current, item) =>
-                current.Replace(string.Format("[{0}]", item.Key), (item.Value ?? "").ToString())
-                );
+            {
+                return current.Replace(string.Format("[{0}]", item.Key), (item.Value ?? "").ToString());
+            });
 
-            result = this.RemoveBlankLinkTags(result);
+            result = RemoveBlankLinkTags(result);
 
             return result;
         }
 
         protected string RemoveBlankLinkTags(string content)
         {
-            var result = Regex.Replace(content, @"<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:""[^""]*""|'[^']*'|[\w\-.:]+))?)*\s*/?>\s*</\1\s*>", string.Empty, RegexOptions.Multiline);
-
-            System.Diagnostics.Debug.WriteLine("HTML Replaced. \n Source {0} \n\n Result {1}", content, result);
-
-            return result;
+            return Regex.Replace(content, @"<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:""[^""]*""|'[^']*'|[\w\-.:]+))?)*\s*/?>\s*</\1\s*>", string.Empty, RegexOptions.Multiline);
         }
 
         public static MailerTemplate CreateFromString(string templateString)
