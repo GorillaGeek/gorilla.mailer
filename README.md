@@ -37,7 +37,7 @@ var template = MailerTemplate.CreateFromFileSystem("path-to-file");
 
 From Namespace:
 ```cs
+// Remember to change the file property 'Buld Action' to 'Embedded Resource'
 var path = "MyApp.Templates.Email.html";
 var template = MailerTemplate.CreateFromManifestResourceStream(path);
 ```
-

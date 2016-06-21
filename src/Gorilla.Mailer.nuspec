@@ -2,11 +2,11 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
+    <version>1.0.4</version>
     <title>$title$</title>
     <authors>Daniel Prado</authors>
     <owners>danieloprado</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <licenseUrl>https://opensource.org/licenses/mit-license.php</licenseUrl>
     <projectUrl>https://github.com/GorillaGeek/gorilla.mailer</projectUrl>
     <iconUrl>https://avatars2.githubusercontent.com/u/10532134</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

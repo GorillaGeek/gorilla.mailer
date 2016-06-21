@@ -1,12 +1,13 @@
 ﻿using Gorilla.Mailer.Exceptions;
 using Gorilla.Mailer.Interfaces;
+using Gorilla.Mailer.Providers;
 using System;
 
-namespace Gorilla.Mailer.Providers
+namespace Gorilla.Mailer
 {
     public class MailerProvider
     {
-        public IMailer Create(enEmailProvider provider, string apiKey = null)
+        public static IMailer Create(enEmailProvider provider, string apiKey = null)
         {
             switch (provider)
             {
@@ -19,7 +20,7 @@ namespace Gorilla.Mailer.Providers
             }
         }
 
-        public IMailer CreateForDevelopement(string outputPath, bool autoStart = true)
+        public static IMailer CreateForDevelopement(string outputPath, bool autoStart = true)
         {
             return new DevelopmentMailer(outputPath, autoStart);
         }
