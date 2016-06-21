@@ -3,16 +3,17 @@ using Gorilla.Mailer.Templates.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Gorilla.Mailer
 {
-    public class MailerTemplate
+    public class Template
     {
         private readonly ITemplateSource _template;
         public virtual Dictionary<string, object> Params { get; set; }
 
-        public MailerTemplate(ITemplateSource template)
+        public Template(ITemplateSource template)
         {
             _template = template;
             Params = new Dictionary<string, object>();
@@ -39,20 +40,20 @@ namespace Gorilla.Mailer
         }
 
         //Statics
-        public static MailerTemplate CreateFromString(string templateString)
+        public static Template CreateFromString(string templateString)
         {
-            return new MailerTemplate(new StringTemplate(templateString));
+            return new Template(new StringTemplate(templateString));
         }
 
-        public static MailerTemplate CreateFromFileSystem(string path)
+        public static Template CreateFromFileSystem(string path)
         {
-            return new MailerTemplate(new FileSystemTemplate(path));
+            return new Template(new FileSystemTemplate(path));
         }
 
-        public static MailerTemplate CreateFromManifestResourceStream(string streamPath)
+        public static Template CreateFromManifestResourceStream(string streamPath, Assembly assembly)
         {
-            var templateSource = new ManifestResourceStreamTemplate(streamPath);
-            return new MailerTemplate(templateSource);
+            var templateSource = new ManifestResourceStreamTemplate(streamPath, assembly);
+            return new Template(templateSource);
         }
     }
 }

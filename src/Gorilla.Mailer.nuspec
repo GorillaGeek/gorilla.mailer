@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.5</version>
+    <version>1.0.7</version>
     <title>$title$</title>
     <authors>Daniel Prado</authors>
     <owners>danieloprado</owners>
@@ -11,7 +11,7 @@
     <iconUrl>https://avatars2.githubusercontent.com/u/10532134</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Mailer for Gorilla Geek development</description>
-    <releaseNotes>Move send grid to another project</releaseNotes>
+    <releaseNotes>Assembly from context</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>Gorilla GorillaGeek Mailer</tags>
   </metadata>
