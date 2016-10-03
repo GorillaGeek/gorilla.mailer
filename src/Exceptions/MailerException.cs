@@ -7,7 +7,8 @@ namespace Gorilla.Mailer.Exceptions
         public enum enReason
         {
             InvalidConfiguration = 1,
-            RejectByProvider = 2
+            RejectByProvider = 2,
+            Other = 3
         }
 
 
